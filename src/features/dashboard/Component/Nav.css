@@ -1,0 +1,21 @@
+.nav{
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logoutButton{
+    margin: 7px;
+}
+
+.userName{
+    font-weight: bold;
+    padding: 1.2rem;
+}
+
+.userPhoto{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
