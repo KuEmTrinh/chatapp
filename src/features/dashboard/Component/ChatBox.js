@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Label from "./Label";
 import Input from "./Input";
-import "./ChatBox.css"
+import "./ChatBox.css";
 export default function ChatBox() {
   const list = useSelector((state) => state?.list?.list);
   const params = useParams();
@@ -22,7 +22,8 @@ export default function ChatBox() {
     <>
       {data ? (
         <div className="flex column chatBox">
-          <Label data={data[0].message} />
+          {data[0].message ? <Label data={data[0].message} /> : ""}
+
           <Input />
         </div>
       ) : (
