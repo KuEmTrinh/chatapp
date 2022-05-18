@@ -1,0 +1,36 @@
+.label{
+    width: 70%;
+    padding: 1rem;
+}
+
+.textBox{
+    background-color: rgba(243, 243, 243, 0.559);
+    padding: 2rem;
+    margin: 1rem 0;
+}
+
+.textP{
+    padding: 0.6rem;
+    border: 1px solid rgba(112, 112, 112, 0.407);
+    border-radius: 3px;
+    color: rgb(112, 112, 112);
+}
+
+.userId{
+    padding-bottom: 0.5rem;
+    color: rgb(112, 112, 112);
+}
+
+.left p {
+    text-align: left;
+}
+.left span{
+    float: left;
+}
+
+.right p{
+    text-align: right;
+}
+.right span{
+    float: right;
+}

@@ -2,3 +2,7 @@
     margin: 0 auto;
     width: 1024px;
 }
+
+.column{
+    flex-direction: column;
+}

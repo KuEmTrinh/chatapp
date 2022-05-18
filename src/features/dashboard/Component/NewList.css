@@ -1,0 +1,12 @@
+.createButton{
+    color: #fff;
+    background-color: #232323;
+}
+
+.inputBox {
+    margin: 0.5rem;
+    padding: 0.5rem 0.2rem;
+    border: 0.3px solid #232323;
+    border-radius: 3px;
+    text-align: center;
+}

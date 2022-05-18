@@ -1,15 +1,33 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { db } from "../../../app/firebase";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+import Label from "./Label";
+import Input from "./Input";
+import "./ChatBox.css"
 export default function ChatBox() {
   const list = useSelector((state) => state?.list?.list);
   const params = useParams();
   const id = params?.id;
+  const [data, setData] = useState("");
   useEffect(() => {
-    console.log(list);
-  }, []);
-  return <div>ABC</div>;
+    if (list) {
+      let findData = list.filter((el) => {
+        return el.id == id;
+      });
+      setData(findData);
+    }
+  }, [id]);
+  return (
+    <>
+      {data ? (
+        <div className="flex column chatBox">
+          <Label data={data[0].message} />
+          <Input />
+        </div>
+      ) : (
+        "Null"
+      )}
+    </>
+  );
 }

@@ -1,3 +1,13 @@
 .list{
     width: 20%;
+    padding: 1rem;
+}
+
+.channelButton {
+    padding: 0.6rem 0.4rem;
+    border-radius: 0.2rem;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 3px;
+    color: rgb(112, 112, 112);
 }
