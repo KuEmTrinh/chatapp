@@ -19,7 +19,6 @@ export default function List() {
         querySnapshot.docs.map((doc) => {
           data.push({
             id: doc.id,
-            message: doc.data().message,
             name: doc.data().name,
             status: doc.data().status,
           });

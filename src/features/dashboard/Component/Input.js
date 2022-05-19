@@ -15,16 +15,13 @@ export default function Input({ chanelId }) {
   };
   const sendMessage = () => {
     const data = db.collection("list").doc(chanelId);
-    data.get().then((snapshot) => {
-      const oldData = snapshot.data().message;
-      oldData.push({
-        userName: userInfomation.displayName,
-        text: inputValue,
-      });
-      data.update({
-        message: oldData,
-      });
-    });
+    data.collection("message").add({
+      userName: userInfomation.displayName,
+      message: inputValue,
+      photoURL: userInfomation.photoURL,
+      uid: userInfomation.uid,
+      createdAt : firebase.firestore.FieldValue.serverTimestamp()
+    })
     setInputValue("");
   };
   const setInfo = () => {

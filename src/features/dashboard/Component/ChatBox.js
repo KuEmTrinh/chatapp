@@ -1,31 +1,42 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { db } from "../../../app/firebase";
 import Label from "./Label";
 import Input from "./Input";
 import "./ChatBox.css";
-export default function ChatBox() {
-  const list = useSelector((state) => state?.list?.list);
+export default function ChatBox({userInfomation}) {
+  const [messages, setMessages] = useState("");
   const params = useParams();
   const id = params?.id;
-  const [data, setData] = useState("");
   useEffect(() => {
-    if (list) {
-      let findData = list.filter((el) => {
-        return el.id == id;
+    console.log(id);
+    db.collection("list")
+      .doc(id)
+      .collection("message")
+      .orderBy("createdAt")
+      .onSnapshot((querySnapshot) => {
+        const mess = [];
+        querySnapshot.docs.map((doc) => {
+          mess.push({
+            id: doc.id,
+            userName: doc.data().userName,
+            uid: doc.data().uid,
+            message: doc.data().message,
+            photoURL: doc.data().photoURL,
+            createdAt: doc.data().createdAt,
+          });
+        });
+        setMessages(mess);
       });
-      setData(findData);
-    }
-    console.log(list)
   }, [id]);
   return (
     <>
-      {data ? (
+      {messages ? (
         <div className="flex column chatBox">
-          {data[0].message ? <Label data={data[0].message} /> : ""}
+          {messages ? <Label messages={messages} userInfomation={userInfomation} /> : ""}
 
-          <Input chanelId={id}/>
+          <Input chanelId={id} userInfomation={userInfomation}/>
         </div>
       ) : (
         "Null"

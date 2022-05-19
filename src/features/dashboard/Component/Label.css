@@ -5,10 +5,22 @@
 
 
 .textP{
-    padding: 0.6rem;
+    padding: 0.7rem 0.9rem;
     border: 1px solid rgba(112, 112, 112, 0.407);
-    border-radius: 3px;
+    border-radius: 1rem;
     color: rgb(112, 112, 112);
+    position: relative;
+}
+
+.textP::after{
+    content: "";
+    position: absolute;
+    /* background-color: #86B049; */
+    z-index: 1;
+    width: 100px;
+    height: 50px;
+    top: 1rem;
+    right: 10%;
 }
 
 .userId{
@@ -28,4 +40,40 @@
 }
 .right span{
     float: right;
+}
+
+.right .labelInfo{
+    float: right;
+}
+.right{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.green .textP{
+    background-color: #86B049;
+    color: #fff;
+    border: none;
+}
+
+.labelPhoto{
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 0.3rem;
+}
+
+.labelInfo{
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.messageLabel{
+    padding: 1rem 0;
+}
+
+.likeButton{
+
 }

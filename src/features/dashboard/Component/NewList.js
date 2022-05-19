@@ -14,7 +14,6 @@ export default function NewList() {
     db.collection("list").add({
       name: inputValue,
       status: true,
-      message: [],
     });
     setInputValue("");
     setOpenToggle(!openToggle);
