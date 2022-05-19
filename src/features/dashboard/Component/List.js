@@ -8,10 +8,10 @@ import { setListDataFirebase } from "./listSlice";
 import NewList from "./NewList";
 export default function List() {
   const [listData, setListData] = useState("");
+  const [clickedIndex, setClickedIndex] = useState("");
   let navigate = useNavigate();
   let dispatch = useDispatch();
   useEffect(() => {
-    console.log("running");
     db.collection("list")
       .orderBy("name")
       .onSnapshot((querySnapshot) => {
@@ -35,11 +35,12 @@ export default function List() {
             return (
               <button
                 onClick={() => {
+                  setClickedIndex(index);
                   // chuyển màn hình qua code logic js
                   navigate(`/${el.id}`);
                 }}
                 key={index}
-                className="channelButton"
+                className={clickedIndex === index ? "channelButton selectedButton" : "channelButton"}
               >
                 {el.name}
               </button>

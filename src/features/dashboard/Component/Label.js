@@ -2,9 +2,24 @@ import React from "react";
 import "./Label.css";
 import { useState } from "react";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-export default function Label({ messages, userInfomation }) {
+import { db } from "../../../app/firebase";
+export default function Label({ messages, userInfomation, channelId }) {
   const [hoverOn, setHoverOn] = useState(false);
   const [elIndex, setElIndex] = useState("");
+  const commentLike = (id) => {
+    // console.log("channel Id: " + id);
+    const likeData = {
+      userName: userInfomation.displayName,
+      uid: userInfomation.uid,
+      likeStatus: true,
+    };
+    db.collection("list")
+      .doc(channelId)
+      .collection("message")
+      .doc(id)
+      .collection("like")
+      .add(likeData);
+  };
   return (
     <div className="flex column label">
       {messages.map((el, index) => {
@@ -23,21 +38,20 @@ export default function Label({ messages, userInfomation }) {
             </div>
             <span
               className="textP"
-              onMouseOver={() => {
-                setHoverOn(true);
+              onClick={() => {
+                setHoverOn(!hoverOn);
                 setElIndex(index);
-              }}
-              onMouseLeave={() => {
-                setHoverOn(false);
               }}
             >
               {el.message}
             </span>
             {hoverOn && elIndex == index ? (
               <div className="likeButton">
-                <ThumbUpAltIcon className="z-index: 2" onClick={() => {
-                  console.log("hello")
-                }} />
+                <ThumbUpAltIcon
+                  onClick={() => {
+                    commentLike(el.id);
+                  }}
+                />
               </div>
             ) : (
               ""

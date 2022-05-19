@@ -5,7 +5,7 @@ import { db } from "../../../app/firebase";
 import Label from "./Label";
 import Input from "./Input";
 import "./ChatBox.css";
-export default function ChatBox({userInfomation}) {
+export default function ChatBox({ userInfomation }) {
   const [messages, setMessages] = useState("");
   const params = useParams();
   const id = params?.id;
@@ -18,6 +18,7 @@ export default function ChatBox({userInfomation}) {
       .onSnapshot((querySnapshot) => {
         const mess = [];
         querySnapshot.docs.map((doc) => {
+          // console.log("message id" + doc.id);
           mess.push({
             id: doc.id,
             userName: doc.data().userName,
@@ -34,9 +35,17 @@ export default function ChatBox({userInfomation}) {
     <>
       {messages ? (
         <div className="flex column chatBox">
-          {messages ? <Label messages={messages} userInfomation={userInfomation} /> : ""}
+          {messages ? (
+            <Label
+              channelId={id}
+              messages={messages}
+              userInfomation={userInfomation}
+            />
+          ) : (
+            ""
+          )}
 
-          <Input chanelId={id} userInfomation={userInfomation}/>
+          <Input chanelId={id} userInfomation={userInfomation} />
         </div>
       ) : (
         "Null"

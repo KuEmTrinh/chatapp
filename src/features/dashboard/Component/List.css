@@ -11,3 +11,8 @@
     border-radius: 3px;
     color: rgb(112, 112, 112);
 }
+
+.selectedButton{
+    background-color: #86B049;
+    color: #fff;
+}
