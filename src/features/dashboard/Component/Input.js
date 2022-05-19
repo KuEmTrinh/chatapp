@@ -7,15 +7,25 @@ import { useState } from "react";
 import "./Input.css";
 import { db } from "../../../app/firebase";
 import { firebase } from "../../../app/firebase";
-export default function Input() {
+export default function Input({ chanelId }) {
   const [inputValue, setInputValue] = useState("");
   const [userInfomation, setUserInfomation] = useState("");
   const changeValue = (e) => {
     setInputValue(e.target.value);
   };
   const sendMessage = () => {
-    console.log(inputValue);
-    console.log(userInfomation.displayName)
+    const data = db.collection("list").doc(chanelId);
+    data.get().then((snapshot) => {
+      const oldData = snapshot.data().message;
+      oldData.push({
+        userName: userInfomation.displayName,
+        text: inputValue,
+      });
+      data.update({
+        message: oldData,
+      });
+    });
+    setInputValue("");
   };
   const setInfo = () => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -23,10 +33,10 @@ export default function Input() {
         setUserInfomation(user);
       }
     });
-  }
-  useEffect(()=> {
+  };
+  useEffect(() => {
     setInfo();
-  },[])
+  }, []);
   return (
     <div className="inputPlace">
       <Box
@@ -43,6 +53,7 @@ export default function Input() {
           placeholder="input message"
           multiline
           variant="standard"
+          value={inputValue}
           onChange={changeValue}
         />
       </Box>

@@ -17,6 +17,7 @@ export default function ChatBox() {
       });
       setData(findData);
     }
+    console.log(list)
   }, [id]);
   return (
     <>
@@ -24,7 +25,7 @@ export default function ChatBox() {
         <div className="flex column chatBox">
           {data[0].message ? <Label data={data[0].message} /> : ""}
 
-          <Input />
+          <Input chanelId={id}/>
         </div>
       ) : (
         "Null"

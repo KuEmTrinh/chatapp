@@ -10,9 +10,9 @@ export default function List() {
   const [listData, setListData] = useState("");
   let navigate = useNavigate();
   let dispatch = useDispatch();
-  const getData = async () => {
-    await db
-      .collection("list")
+  useEffect(() => {
+    console.log("running");
+    db.collection("list")
       .orderBy("name")
       .onSnapshot((querySnapshot) => {
         const data = [];
@@ -27,9 +27,6 @@ export default function List() {
         setListData(data);
         dispatch(setListDataFirebase(data));
       });
-  };
-  useEffect(() => {
-    getData();
   }, []);
   return (
     <>

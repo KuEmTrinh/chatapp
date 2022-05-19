@@ -5,8 +5,8 @@ export default function Label({ data }) {
     <div className="flex column label">
       {data.map((el, index) => {
         return (
-          <div className={`textBox ${index % 2 == 0 ? "left" : "right"}`}>
-            <p className="userId">{el.userId}</p>
+          <div className={`${index % 2 == 0 ? "left" : "right"}`}>
+            <p className="userId">{el.userName}</p>
             <span className="textP">{el.text}</span>
           </div>
         );
