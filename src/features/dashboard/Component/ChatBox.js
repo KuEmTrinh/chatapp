@@ -11,14 +11,21 @@ export default function ChatBox({ userInfomation }) {
   const id = params?.id;
   useEffect(() => {
     console.log(id);
-    db.collection("list")
+    const unsubscribe = db
+      .collection("list")
       .doc(id)
       .collection("message")
       .orderBy("createdAt")
       .onSnapshot((querySnapshot) => {
+        if (querySnapshot.type == "added") {
+          console.log("we have change");
+        }
         const mess = [];
+        // console.log(querySnapshot);
         querySnapshot.docs.map((doc) => {
+          // console.log(doc.id);
           // console.log("message id" + doc.id);
+          // console.log(doc.data());
           mess.push({
             id: doc.id,
             userName: doc.data().userName,
@@ -30,6 +37,7 @@ export default function ChatBox({ userInfomation }) {
         });
         setMessages(mess);
       });
+    return unsubscribe;
   }, [id]);
   return (
     <>
